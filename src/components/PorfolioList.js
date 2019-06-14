@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Application from "../components/Application";
+import Application from "./Application";
 
 class PorfolioList extends Component {
   render() {

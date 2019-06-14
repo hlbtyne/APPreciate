@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Application from "../components/AppDetails"
+import Application from "./AppDetails"
 
 class GeneralList extends Component {
     render() {
         return (
             <div>
-                <Application />
+                {
+                    this.props.apps.map(app => <Application app={app} />)
+                }
             </div>
         );
     }

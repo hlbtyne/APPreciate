@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import {} from "react-bootstrap"
-import Home from "../components/Home.js"
+import Home from "./Home"
 
 
 function App() {
