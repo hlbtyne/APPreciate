@@ -79,3 +79,5 @@ const apps = [
         price: null
     }
 ]
+
+export default apps

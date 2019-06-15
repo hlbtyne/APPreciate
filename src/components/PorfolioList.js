@@ -3,11 +3,7 @@ import Application from "./Application";
 
 class PorfolioList extends Component {
   render() {
-    return (
-      <div>
-        <Application />
-      </div>
-    );
+    return <div>{/* <Application /> */}</div>;
   }
 }
 
