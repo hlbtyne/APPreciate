@@ -77,6 +77,19 @@ const apps = [
         ],
         category: "Music",
         price: null
+    },
+    {
+        id: 7,
+        name: 'Citymapper',
+        image: 'https://www.cruisinaltitude.com/wp-content/uploads/2016/03/CityMapperlogo.jpg',
+        description: 'Real-time departures. Transport maps. Line status and real-time disruption alerts. Uber integration. Live cycle hire info. Constant updates. Everything you need -- and may not even realise you need -- to manage your life in the city.',
+        rating: 4.3,
+        reviews: [
+            "Got lost :(",
+            "Missed the bus :("
+        ],
+        category: "Navigation",
+        price: null
     }
 ]
 

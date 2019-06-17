@@ -55,8 +55,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar home={this.home} viewPortfolio={this.viewPortfolio}/>
-        {/* <AddAppForm /> */}
+        <Navbar home={this.home} viewPortfolio={this.viewPortfolio} portfolio={this.state.viewPortfolio} selectedApp={this.state.selectedApp}/>
         {
           (this.state.viewPortfolio && this.state.selectedApp)
             ? <AppDetails app={this.state.selectedApp} portfolioApps={this.state.portfolioApps} key={this.state.selectedApp.id} addOrRemove={this.addOrRemoveFromPortfolio}/> 

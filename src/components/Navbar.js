@@ -21,7 +21,12 @@ class Navbar extends Component {
                             <a className="nav-link" href="#">Add App</a>
                         </li>
                     </ul>
-                    <Searchbar />
+                    {
+                        (!this.props.portfolio && !this.props.selectedApp)
+                            ? <Searchbar />
+                            : null
+                    }
+                    
                 </div>
             </nav>
         );
