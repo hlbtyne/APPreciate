@@ -42,7 +42,7 @@ const apps = [
     {
         id: 4,
         name: 'Airbnb',
-        image: 'https://metropolitan.fi/files/2018-05/air-bonobo.png',
+        image: 'https://www.iosicongallery.com/icons/airbnb-2014-07-29/512.png',
         description: 'Be at home in the world. Find the best vacation home rentals and appartments.',
         rating: 4.8,
         reviews: [
