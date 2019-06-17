@@ -10,31 +10,31 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 
-const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: 345
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500]
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   card: {
+//     maxWidth: 345
+//   },
+//   media: {
+//     height: 0,
+//     paddingTop: "56.25%" // 16:9
+//   },
+//   expand: {
+//     transform: "rotate(0deg)",
+//     marginLeft: "auto",
+//     transition: theme.transitions.create("transform", {
+//       duration: theme.transitions.duration.shortest
+//     })
+//   },
+//   expandOpen: {
+//     transform: "rotate(180deg)"
+//   },
+//   avatar: {
+//     backgroundColor: red[500]
+//   }
+// }));
 
 const Application = props => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   function handleExpandClick() {
@@ -42,16 +42,21 @@ const Application = props => {
   }
 
   return (
-    <Card className={classes.card} onClick={()=> props.selectApp(props.app)}>
-      <CardHeader title={props.app.name} />
-      <CardMedia className={classes.media} image={props.app.image} />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.app.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>{props.app.rating}</CardActions>
-    </Card>
+    <div>
+
+      <div onClick={()=> props.selectApp(props.app)} className="card border-light mb-3" style={{width: 400, margin: 30}}>
+        <div class="card-header">
+          <h4>{props.app.name}</h4>
+        </div>
+        <img src={props.app.image} style={{width: 398}}></img>
+        <div class="card-body">
+          <h5>Category: {props.app.category}</h5>
+          <p class="card-text">{props.app.description}</p>
+        </div>
+      </div>
+
+    </div>
+    
   );
 };
 
