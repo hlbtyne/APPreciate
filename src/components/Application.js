@@ -1,13 +1,6 @@
 import React from "react";
 
 const Application = props => {
-  // const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  function handleExpandClick() {
-    setExpanded(!expanded);
-  }
-
   return (
     <div>
 

@@ -29,7 +29,7 @@ class Home extends Component {
     })
   };
 
-  addToPortfolio = app => {
+  addOrRemoveFromPortfolio = app => {
     if (this.state.portfolioApps.includes(app)) return
     
     this.setState({
@@ -37,9 +37,14 @@ class Home extends Component {
     })
   }
 
+  
+
   viewPortfolio = () => {
     this.setState({
       viewPortfolio: true
+    })
+    this.setState({
+      selectedApp: null
     })
   }
 
@@ -49,11 +54,18 @@ class Home extends Component {
         <Navbar home={this.home} viewPortfolio={this.viewPortfolio}/>
         {/* <AddAppForm /> */}
         {
-          (this.state.viewPortfolio)
-          ? <PortfolioList apps={this.state.portfolioApps}/>
-          : (this.state.selectedApp)
-            ? <AppDetails app={this.state.selectedApp} key={this.state.selectedApp.id} addToPortfolio={this.addToPortfolio}/> 
-            : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
+          (this.state.viewPortfolio && this.state.selectedApp)
+            ? <AppDetails app={this.state.selectedApp} portfolioApps={this.state.portfolioApps} key={this.state.selectedApp.id} addOrRemove={this.addOrRemoveFromPortfolio}/> 
+            : (this.state.viewPortfolio)
+              ? <PortfolioList apps={this.state.portfolioApps} selectApp={this.selectApp}/>
+              : (this.state.selectedApp)
+                ? <AppDetails 
+                  app={this.state.selectedApp} 
+                  key={this.state.selectedApp.id} 
+                  portfolioApps={this.state.portfolioApps}
+                  addOrRemove={this.addOrRemoveFromPortfolio}
+                /> 
+                : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
         
       </div>
@@ -63,11 +75,9 @@ class Home extends Component {
 
 export default Home;
 
-// User can view apps on the market. --
-// User can click on an app to view app details (onClick).
+// User can log in
 // User can give their review on an app from within app details.
 // User can delete a review.
 // User can update a review.
-// User can add an app from general list to their Portfolio.
 // User can create a new app to add to general list.
-// User Logout
+// User log out

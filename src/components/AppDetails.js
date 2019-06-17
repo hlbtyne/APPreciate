@@ -23,7 +23,11 @@ const AppDetails = props => {
           <img 
             src={props.app.image}
             alt="{props.app.name} logo"
-            style={{height: 400}} 
+            style={{
+              height: 400,
+              margin: 20,
+              borderRadius: 20
+            }} 
           />
 
           <div style={{
@@ -33,19 +37,32 @@ const AppDetails = props => {
             <h4>Category: {props.app.category}</h4>
             <p>{props.app.description}</p>
             <h4>{props.app.rating} <i className="fas fa-star small"></i></h4>
-            <button 
-              onClick={() => props.addToPortfolio(props.app)} 
-              className="btn btn-outline-secondary btn-lg" 
-              style={{marginTop: 30}}
-            >
-              Add to my portfolio
-            </button>
+            {
+              
+                <button 
+                    onClick={() => props.addOrRemove(props.app)} 
+                    className="btn btn-outline-secondary btn-lg" 
+                    style={{marginTop: 30}}
+                  >
+                    {
+                      (props.portfolioApps.includes(props.app))
+                        ? "Remove from portfolio"
+                        : "Add to portfolio"
+                    }
+                    
+                  </button>
+            }
 
           </div>
         </div>
 
         <div className="jumbotron">
-          <h3 className="display-5" style={{textAlign: "left"}}>Reviews</h3>
+          <div className="form-group" style={{textAlign: "left"}}>
+            <h3 className="display-5">Leave a review</h3>
+            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            <button type="submit" class="btn btn-outline-secondary" style={{marginTop: 10}}>Submit</button>
+          </div>
+          {/* <h3 className="display-5" style={{textAlign: "left", marginTop: 30}}>Reviews</h3> */}
           {
             props.app.reviews.map(review => {
               return(
@@ -79,6 +96,8 @@ const AppDetails = props => {
               )
             })
           }
+          <hr className="my-4" />
+
         </div>
 
       </div>
