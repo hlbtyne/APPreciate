@@ -15,7 +15,7 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse" id="navbarColor02">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <a onClick={this.props.viewPortfolio}className="nav-link" href="#">My Portfolio</a>
+                            <a onClick={this.props.viewPortfolio} className="nav-link" href="#">My Portfolio</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Add App</a>

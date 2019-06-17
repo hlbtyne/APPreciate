@@ -49,10 +49,10 @@ class Home extends Component {
         <Navbar home={this.home} viewPortfolio={this.viewPortfolio}/>
         {/* <AddAppForm /> */}
         {
-            (this.state.selectedApp)
+          (this.state.viewPortfolio)
+          ? <PortfolioList apps={this.state.portfolioApps}/>
+          : (this.state.selectedApp)
             ? <AppDetails app={this.state.selectedApp} key={this.state.selectedApp.id} addToPortfolio={this.addToPortfolio}/> 
-            : (this.state.viewPortfolio)
-            ? <PortfolioList />
             : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
         
