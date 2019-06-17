@@ -10,7 +10,8 @@ class Home extends Component {
   state = {
     apps: apps,
     portfolioApps: [], 
-    selectedApp: null
+    selectedApp: null,
+    viewPortfolio: false
   };
 
   selectApp = app => {
@@ -19,29 +20,41 @@ class Home extends Component {
     });
   };
 
-  deselectApp = () => {
+  home = () => {
     this.setState({
       selectedApp: null
     });
+    this.setState({
+      viewPortfolio: false
+    })
   };
 
-  addToPortfolio=(app)=>{
+  addToPortfolio = app => {
+    if (this.state.portfolioApps.includes(app)) return
+    
     this.setState({
       portfolioApps: [...this.state.portfolioApps, app]
+    })
+  }
+
+  viewPortfolio = () => {
+    this.setState({
+      viewPortfolio: true
     })
   }
 
   render() {
     return (
       <div>
-        <Navbar deselectApp={this.deselectApp} />
+        <Navbar home={this.home} viewPortfolio={this.viewPortfolio}/>
         {/* <AddAppForm /> */}
         {
-            this.state.selectedApp 
+            (this.state.selectedApp)
             ? <AppDetails app={this.state.selectedApp} key={this.state.selectedApp.id} addToPortfolio={this.addToPortfolio}/> 
+            : (this.state.viewPortfolio)
+            ? <PortfolioList />
             : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
-        <PortfolioList />
         
       </div>
     );

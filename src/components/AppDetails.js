@@ -66,14 +66,14 @@ const AppDetails = props => {
                         display: "flex", 
                         flexDirection: "column"
                       }}>
-                      <button type="button" class="btn">
+                      <button type="button" className="btn">
                         <i className="fas fa-pencil-alt"></i>
                       </button>
-                      <button type="button" class="btn">
-                        <i class="fas fa-trash-alt"></i>
+                      <button type="button" className="btn">
+                        <i className="fas fa-trash-alt"></i>
                       </button>
                     </div>
-                    
+
                   </div>
                 </div>
               )
