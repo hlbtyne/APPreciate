@@ -9,7 +9,7 @@ import apps from "../data/db.js";
 class Home extends Component {
   state = {
     apps: apps,
-    portfolioApp: [], 
+    portfolioApps: [], 
     selectedApp: null
   };
 
@@ -27,7 +27,7 @@ class Home extends Component {
 
   addToPortfolio=(app)=>{
     this.setState({
-        apps: [...this.state.portfolioApp, app]
+      portfolioApps: [...this.state.portfolioApps, app]
     })
   }
 
@@ -38,7 +38,7 @@ class Home extends Component {
         {/* <AddAppForm /> */}
         {
             this.state.selectedApp 
-            ? <AppDetails app={this.state.selectedApp} addToPortfolio={this.addToPortfolio}/> 
+            ? <AppDetails app={this.state.selectedApp} key={this.state.selectedApp.id} addToPortfolio={this.addToPortfolio}/> 
             : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
         <PortfolioList />
