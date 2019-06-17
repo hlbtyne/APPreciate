@@ -11,7 +11,6 @@ function AppDetails(props) {
         {
           props.app.reviews.map(review => <h4>{review}</h4> )
         }
-        <button onClick={props.deselectApp} >All Apps</button>
         <button onClick={() => props.addToPortfolio(props.app)}></button>
       </div>
     );

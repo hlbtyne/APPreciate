@@ -8,7 +8,7 @@ import apps from "../data/db.js";
 
 class Home extends Component {
   state = {
-    apps: [],
+    apps: apps,
     portfolioApp: [], 
     selectedApp: null
   };
@@ -34,11 +34,11 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <AddAppForm />
+        <Navbar deselectApp={this.deselectApp} />
+        {/* <AddAppForm /> */}
         {
             this.state.selectedApp 
-            ? <AppDetails app={this.state.selectedApp} deselectApp={this.deselectApp} addToPortfolio={this.addToPortfolio}/> 
+            ? <AppDetails app={this.state.selectedApp} addToPortfolio={this.addToPortfolio}/> 
             : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
         <PortfolioList />
