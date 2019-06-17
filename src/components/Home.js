@@ -30,14 +30,18 @@ class Home extends Component {
   };
 
   addOrRemoveFromPortfolio = app => {
-    if (this.state.portfolioApps.includes(app)) return
+    if (!this.state.portfolioApps.includes(app)) {
+      this.setState({
+        portfolioApps: [...this.state.portfolioApps, app]
+      })
+    } else {
+      const remainingApps = this.state.portfolioApps.filter(pa => pa !== app )
+      this.setState({
+        portfolioApps: remainingApps
+      })
+    }
     
-    this.setState({
-      portfolioApps: [...this.state.portfolioApps, app]
-    })
   }
-
-  
 
   viewPortfolio = () => {
     this.setState({
