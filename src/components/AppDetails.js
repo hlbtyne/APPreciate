@@ -2,17 +2,7 @@ import React, { Component } from "react"
 
 class AppDetails extends Component {
 
-    state ={
-      reviews: this.props.app.reviews
-    }
-
     progressBar = Math.round(this.props.app.rating / 5) / 10
-
-    addReview = event => {
-      event.preventDefault();
-      const review = event.target.review.value
-      this.setState({reviews: [review, ...this.state.reviews]})
-    }
 
     render() {
       return (
@@ -68,16 +58,15 @@ class AppDetails extends Component {
           </div>
   
           <div className="jumbotron">
-            <form onSubmit={this.addReview} className="form-group" style={{textAlign: "left"}}>
+            <form onSubmit={(event) => this.props.addReview(event)} className="form-group" style={{textAlign: "left"}}>
               <h3 className="display-5">Leave a review</h3>
-              <textarea class="form-control" name="review" rows="3"></textarea>
-              <button type="submit" class="btn btn-outline-secondary" style={{marginTop: 10}}>Submit</button>
+              <textarea className="form-control" name="review" rows="3"></textarea>
+              <button type="submit" className="btn btn-outline-secondary" style={{marginTop: 10}}>Submit</button>
             </form>
-            {/* <h3 className="display-5" style={{textAlign: "left", marginTop: 30}}>Reviews</h3> */}
             {
-              this.state.reviews.map(review => {
+              this.props.appReviews.map(review => {
                 return(
-                  <div style={{textAlign: "left"}}>
+                  <div key={review} style={{textAlign: "left"}}>
                     <hr className="my-4" />
                     <div style={{
                       display: "flex", flexDirection: "row"

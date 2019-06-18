@@ -11,18 +11,21 @@ class Home extends Component {
     apps: apps,
     portfolioApps: [], 
     selectedApp: null,
+    selectedAppReviews: [],
     viewPortfolio: false
   };
 
   selectApp = app => {
     this.setState({
-      selectedApp: app
+      selectedApp: app,
+      selectedAppReviews: app.reviews
     });
   };
 
   home = () => {
     this.setState({
-      selectedApp: null
+      selectedApp: null,
+      selectedAppReviews: []
     });
     this.setState({
       viewPortfolio: false
@@ -48,7 +51,16 @@ class Home extends Component {
       viewPortfolio: true
     })
     this.setState({
-      selectedApp: null
+      selectedApp: null,
+      selectedAppReviews: []
+    })
+  }
+
+  addReview = event => {
+    event.preventDefault();
+    const review = event.target.review.value
+    this.setState({
+      selectedAppReviews: [review, ...this.state.selectedAppReviews]
     })
   }
 
@@ -58,7 +70,14 @@ class Home extends Component {
         <Navbar home={this.home} viewPortfolio={this.viewPortfolio} portfolio={this.state.viewPortfolio} selectedApp={this.state.selectedApp}/>
         {
           (this.state.viewPortfolio && this.state.selectedApp)
-            ? <AppDetails app={this.state.selectedApp} portfolioApps={this.state.portfolioApps} key={this.state.selectedApp.id} addOrRemove={this.addOrRemoveFromPortfolio}/> 
+            ? <AppDetails 
+                app={this.state.selectedApp} 
+                portfolioApps={this.state.portfolioApps} 
+                key={this.state.selectedApp.id} 
+                addOrRemove={this.addOrRemoveFromPortfolio}
+                addReview={this.addReview}
+                appReviews={this.state.selectedAppReviews}
+                /> 
             : (this.state.viewPortfolio)
               ? <PortfolioList apps={this.state.portfolioApps} selectApp={this.selectApp}/>
               : (this.state.selectedApp)
@@ -67,6 +86,8 @@ class Home extends Component {
                   key={this.state.selectedApp.id} 
                   portfolioApps={this.state.portfolioApps}
                   addOrRemove={this.addOrRemoveFromPortfolio}
+                  addReview={this.addReview}
+                  appReviews={this.state.selectedAppReviews}
                 /> 
                 : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
         }
