@@ -4,20 +4,28 @@ import Navbar from "./Navbar";
 import GeneralList from "./GeneralList";
 import PortfolioList from "./PorfolioList";
 import AppDetails from "./AppDetails";
-import apps from "../data/db.js";
+
+const appsAPI = 'http://localhost:3001/apps'
+const reviewsAPI = 'http://localhost:3001/reviews'
 
 class Home extends Component {
   state = {
-    apps: apps,
+    apps: [],
     portfolioApps: [], 
     selectedApp: null,
-    selectedAppReviews: [],
     viewPortfolio: false, 
     searchTerm: ""
   };
 
 
-  updateSearchTerm=(e)=>{
+  componentDidMount() {
+    fetch(appsAPI)
+    .then(resp => resp.json())
+    .then(apps => this.setState({ apps })
+    )
+  }
+
+  updateSearchTerm = (e) => {
     this.setState({
       searchTerm: e.target.value 
     })
@@ -26,14 +34,12 @@ class Home extends Component {
   selectApp = app => {
     this.setState({
       selectedApp: app,
-      selectedAppReviews: app.reviews
     });
   };
 
   home = () => {
     this.setState({
       selectedApp: null,
-      selectedAppReviews: []
     });
     this.setState({
       viewPortfolio: false
@@ -60,23 +66,56 @@ class Home extends Component {
     })
     this.setState({
       selectedApp: null,
-      selectedAppReviews: []
     })
   }
 
   addReview = event => {
     event.preventDefault();
     const review = event.target.review.value
-    this.setState({
-      selectedAppReviews: [review, ...this.state.selectedAppReviews]
+
+    const newReview = {
+      app_id: this.state.selectedApp.id,
+      comment: review,
+      user_id: 1
+    }
+
+    this.addReviewToBackend(newReview)
+    .then(review => {
+      const updatedSelectedApp = this.state.selectedApp
+      updatedSelectedApp.reviews.push(review)
+      this.setState({
+        selectedApp: updatedSelectedApp})
     })
-    event.target.review.value = ''
+      event.target.review.value = ''
+    
+  }
+
+  addReviewToBackend = review => {
+    return fetch(reviewsAPI, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(review)
+    })
+    .then(resp => resp.json())
+  }
+
+  deleteReviewBackend = review => {
+    return fetch(reviewsAPI+`/${review.id}`, {
+      method: "DELETE", 
+      headers: {"Content-Type" : "application/json" }, 
+      body: JSON.stringify(review)
+    })
+    .then(resp => resp.json())
   }
 
   deleteReview = review => {
-    const remainingReviews = this.state.selectedAppReviews.filter(sar => sar !== review )
-    this.setState({
-      selectedAppReviews: remainingReviews
+    this.deleteReviewBackend(review)
+    .then(review => {
+      const updatedSelectedApp = this.state.selectedApp
+      const remainingReviews = this.state.selectedApp.reviews.filter(rev => rev.id !== review.id )
+      updatedSelectedApp.reviews = remainingReviews
+      this.setState({
+        selectedApp: updatedSelectedApp})
     })
   }
 
@@ -96,7 +135,7 @@ class Home extends Component {
                 key={this.state.selectedApp.id} 
                 addOrRemove={this.addOrRemoveFromPortfolio}
                 addReview={this.addReview}
-                appReviews={this.state.selectedAppReviews}
+                appReviews={this.state.selectedApp.reviews}
                 deleteReview={this.deleteReview}
                 /> 
             : (this.state.viewPortfolio)
@@ -108,7 +147,7 @@ class Home extends Component {
                   portfolioApps={this.state.portfolioApps}
                   addOrRemove={this.addOrRemoveFromPortfolio}
                   addReview={this.addReview}
-                  appReviews={this.state.selectedAppReviews}
+                  appReviews={this.state.selectedApp.reviews}
                   deleteReview={this.deleteReview}
                 /> 
                 : <GeneralList apps={this.state.apps} selectApp={this.selectApp} searchTerm={this.state.searchTerm}/>

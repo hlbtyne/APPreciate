@@ -4,6 +4,11 @@ class AppDetails extends Component {
 
     progressBar = Math.round(this.props.app.rating / 5) / 10
 
+
+  // componentWillUpdate(){
+
+  // }
+
     render() {
       return (
         <div className="App">
@@ -64,15 +69,15 @@ class AppDetails extends Component {
               <button type="submit" className="btn btn-outline-secondary" style={{marginTop: 10}}>Submit</button>
             </form>
             {
-              this.props.appReviews.map(review => {
+              this.props.appReviews.slice().reverse().map(review => {
                 return(
-                  <div key={review} style={{textAlign: "left"}}>
+                  <div key={review.id} style={{textAlign: "left"}}>
                     <hr className="my-4" />
                     <div style={{
                       display: "flex", flexDirection: "row"
                     }}>
                       <div style={{flex: 0.95}}>
-                        <span className="lead">{review}</span>
+                        <span className="lead">{review.comment}</span>
                       </div>
   
                       <div 
