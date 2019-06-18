@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import AddAppForm from "./AddAppForm";
+// import AddAppForm from "./AddAppForm";
 import GeneralList from "./GeneralList";
 import PortfolioList from "./PorfolioList";
 import AppDetails from "./AppDetails";
@@ -12,8 +12,16 @@ class Home extends Component {
     portfolioApps: [], 
     selectedApp: null,
     selectedAppReviews: [],
-    viewPortfolio: false
+    viewPortfolio: false, 
+    searchTerm: ""
   };
+
+
+  updateSearchTerm=(e)=>{
+    this.setState({
+      searchTerm: e.target.value 
+    })
+  }
 
   selectApp = app => {
     this.setState({
@@ -62,12 +70,24 @@ class Home extends Component {
     this.setState({
       selectedAppReviews: [review, ...this.state.selectedAppReviews]
     })
+    event.target.review.value = ''
+  }
+
+  deleteReview = review => {
+    const remainingReviews = this.state.selectedAppReviews.filter(sar => sar !== review )
+    this.setState({
+      selectedAppReviews: remainingReviews
+    })
   }
 
   render() {
     return (
       <div>
-        <Navbar home={this.home} viewPortfolio={this.viewPortfolio} portfolio={this.state.viewPortfolio} selectedApp={this.state.selectedApp}/>
+        <Navbar home={this.home} 
+          viewPortfolio={this.viewPortfolio} 
+          portfolio={this.state.viewPortfolio} 
+          selectedApp={this.state.selectedApp}
+          updateSearchTerm={this.updateSearchTerm}/>
         {
           (this.state.viewPortfolio && this.state.selectedApp)
             ? <AppDetails 
@@ -77,6 +97,7 @@ class Home extends Component {
                 addOrRemove={this.addOrRemoveFromPortfolio}
                 addReview={this.addReview}
                 appReviews={this.state.selectedAppReviews}
+                deleteReview={this.deleteReview}
                 /> 
             : (this.state.viewPortfolio)
               ? <PortfolioList apps={this.state.portfolioApps} selectApp={this.selectApp}/>
@@ -88,8 +109,9 @@ class Home extends Component {
                   addOrRemove={this.addOrRemoveFromPortfolio}
                   addReview={this.addReview}
                   appReviews={this.state.selectedAppReviews}
+                  deleteReview={this.deleteReview}
                 /> 
-                : <GeneralList apps={this.state.apps} selectApp={this.selectApp}/>
+                : <GeneralList apps={this.state.apps} selectApp={this.selectApp} searchTerm={this.state.searchTerm}/>
         }
         
       </div>

@@ -83,10 +83,8 @@ class AppDetails extends Component {
                           display: "flex", 
                           flexDirection: "column"
                         }}>
-                        <button type="button" className="btn">
-                          <i className="fas fa-pencil-alt"></i>
-                        </button>
-                        <button type="button" className="btn">
+                        
+                        <button onClick={() => this.props.deleteReview(review)} type="button" className="btn">
                           <i className="fas fa-trash-alt"></i>
                         </button>
                       </div>

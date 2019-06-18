@@ -23,7 +23,7 @@ class Navbar extends Component {
                     </ul>
                     {
                         (!this.props.portfolio && !this.props.selectedApp)
-                            ? <Searchbar />
+                            ? <Searchbar updateSearchTerm={this.props.updateSearchTerm}/>
                             : null
                     }
                     
