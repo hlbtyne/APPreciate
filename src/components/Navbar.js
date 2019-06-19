@@ -18,7 +18,7 @@ class Navbar extends Component {
                             <a onClick={this.props.viewPortfolio} className="nav-link" href="#">My Portfolio</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Add App</a>
+                            <a onClick={this.props.signout} className="nav-link" href="#">Sign out</a>
                         </li>
                     </ul>
                     {
