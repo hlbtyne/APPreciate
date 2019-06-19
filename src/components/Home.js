@@ -7,6 +7,7 @@ import AppDetails from "./AppDetails";
 
 const appsAPI = 'http://localhost:3001/apps'
 const reviewsAPI = 'http://localhost:3001/reviews'
+const userappsAPI = 'http://localhost:3001/user_apps'
 
 class Home extends Component {
   state = {
@@ -48,17 +49,36 @@ class Home extends Component {
 
   addOrRemoveFromPortfolio = app => {
     if (!this.state.portfolioApps.includes(app)) {
-      this.setState({
-        portfolioApps: [...this.state.portfolioApps, app]
+      const newuserapp = {
+        app_id: app.id,
+        user_id: 1
+      }
+      
+      this.createUserAppBackend(newuserapp)
+      .then(userapp => {
+        const app = this.state.apps.filter(app => app.id === userapp.app_id)
+        this.setState({
+          portfolioApps: [...this.state.portfolioApps, app[0]]
+        })
       })
+
     } else {
       const remainingApps = this.state.portfolioApps.filter(pa => pa !== app )
       this.setState({
         portfolioApps: remainingApps
       })
     }
-    
   }
+
+  createUserAppBackend = userapp => {
+    return fetch(userappsAPI, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(userapp)
+    })
+    .then(resp => resp.json())
+  }
+
 
   viewPortfolio = () => {
     this.setState({
