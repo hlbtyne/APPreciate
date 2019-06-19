@@ -10,7 +10,11 @@ class GeneralList extends Component {
   render() {
     return (
       <div>
-        <h2 style={{padding: 15, paddingLeft: 30, textAlign: "left", background: "#e9ecef"}}>Apps</h2>
+        <h2 style={{padding: 15, paddingLeft: 30, textAlign: "left", background: "#e9ecef"}}>{
+          this.props.username
+            ? `Welcome back ${this.props.username}!`
+            : null
+        }</h2>
         <div className="card-group" role="group">
           {
           this.filterBySearchTerm()

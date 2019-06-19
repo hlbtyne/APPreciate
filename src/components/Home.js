@@ -146,7 +146,9 @@ class Home extends Component {
           viewPortfolio={this.viewPortfolio} 
           portfolio={this.state.viewPortfolio} 
           selectedApp={this.state.selectedApp}
-          updateSearchTerm={this.updateSearchTerm}/>
+          updateSearchTerm={this.updateSearchTerm}
+          signout={this.props.signout}
+        />
         {
           (this.state.viewPortfolio && this.state.selectedApp)
             ? <AppDetails 
@@ -170,7 +172,12 @@ class Home extends Component {
                   appReviews={this.state.selectedApp.reviews}
                   deleteReview={this.deleteReview}
                 /> 
-                : <GeneralList apps={this.state.apps} selectApp={this.selectApp} searchTerm={this.state.searchTerm}/>
+                : <GeneralList 
+                    apps={this.state.apps} 
+                    selectApp={this.selectApp} 
+                    searchTerm={this.state.searchTerm}
+                    username={this.props.username}
+                  />
         }
         
       </div>
