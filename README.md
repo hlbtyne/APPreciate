@@ -1,3 +1,9 @@
+## APPreciate
+
+APPreciate is an online app review sharing platform. Users can view popular apps and their ratings, add apps to their portfolio and leave reviews.
+
+React front-end within "APPreciate" repo, and rails backend within "APPreciate-server" repo (I am a collaborator on this repo, so it can be found in my github overview). Project currently at MVP stage.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
